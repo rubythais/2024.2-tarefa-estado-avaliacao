@@ -149,5 +149,3 @@ continue o preenchimento da tabela abaixo, considerando que o sistema operaciona
 | 22   | --    | --         | --         | ex linha 7 | t3         |
 | 23   | ex t3 | pr         | --         | --         | t1         |
 | 24   | --    | --         | --         | ex linha 8 | t1         |
-
-| 12   | ??    | ??         | ??         | ??         | t1         |
