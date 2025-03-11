@@ -143,7 +143,16 @@ continue o preenchimento da tabela abaixo, considerando que o sistema operaciona
 
 
 
-
+Comentários dw alguns momentos-chave:
+- **Tick 05**: t1 começa a execucao
+- **Tick 07**: t2 entra em suspensao (su 1) devido a operação de E/S
+- **Tick 09**: t3 inicia a sua execução
+- **Tick 11-14**: t3 tá em loop, executando a msm linha repetidamente.
+- **Tick 15**: t3 finaliza sua execuçao (fi), liberando espaço na fila.
+- **Tick 20**: t1 entra em loop.
+- **Tick 25-35**: Alternancia entre os t1 e t2, ambos executando repetitivamente.
+- **Tick 36**: t1 finaliza aq
+- **Tick 37**: t2 finaliza, encerrando a execuçao das tarefs.
 
 ## Tarefa 2 - fatia tempo com valor 10 ticks
 
