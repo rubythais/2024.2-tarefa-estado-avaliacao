@@ -147,9 +147,7 @@ continue o preenchimento da tabela abaixo, considerando que o sistema operaciona
 
 ## Tarefa 2 - fatia tempo com valor 10 ticks
 
-
 continue o preenchimento da tabela abaixo, considerando que o sistema operacional tem 10 _ticks_ como valor da fatia de tempo (_quantum_ ou _time slice_).
-
 
 | tick | SO    | t1         | t2         | t3         | Fila de pr |
 | ---- | ----- | ---------- | ---------- | ---------- | ---------- |
@@ -157,23 +155,37 @@ continue o preenchimento da tabela abaixo, considerando que o sistema operaciona
 | 02   | ex    | no         | --         | --         | --         |
 | 03   | ex    | pr         | no         | --         | t1         |
 | 04   | ex    | --         | pr         | no         | t1, t2     |
-| 05   | ex t1 | --         | --         | pr         | t2, t3     |
+| 05   | ex t1 | --         | --         | pr         | t2, t3     |   **t1 começa a execução.**
 | 06   | --    | ex linha 1 | --         | --         | t2, t3     |
-| 07   | ex t2 | --         | --         | --         | t2, t3     |
-| 08   | --    | --         | --         | --         | t3         |
-| 09   | ex t3 | pr         | --         | --         | t1         |
-| 10   | --    | --         | --         | ex linha 1 | t1         |
-| 11   | ex t1 | --         | --         | --         | t2         |
-| 12   | --    | --         | --         | ex linha 2 | t3         |
-| 13   | ex t2 | --         | --         | --         | t2         |
-| 14   | --    | --         | --         | ex linha 3 | t3         |
-| 15   | ex t1 | --         | --         | --         | t2         |
-| 16   | --    | --         | --         | ex linha 4 | t3         |
-| 17   | ex t2 | --         | --         | --         | t2         |
-| 18   | --    | --         | --         | ex linha 5 | t3         |
-| 19   | ex t3 | pr         | --         | --         | t1         |
-| 20   | --    | --         | --         | ex linha 6 | t1         |
-| 21   | ex t1 | --         | --         | --         | t2         |
-| 22   | --    | --         | --         | ex linha 7 | t3         |
-| 23   | ex t3 | pr         | --         | --         | t1         |
-| 24   | --    | --         | --         | ex linha 8 | t1         |
+| 07   | ex t2 | su 1       | --         | --         | t2, t3     |
+| 08   | --    | su 2       | ex linha 1 | --         | t3         |
+| 09   | ex t3 | pr         | su 1       | --         | t1, t3     |   **t3 inicia sua execução.**
+| 10   | --    | --         | su 2       | ex linha 1 | t1, t3     |
+| 11   | --    | --         | pr         | ex linha 2 | t1, t2, t3 |   **t3 está em loop, executando a msm linha repetidamente**
+| 12   | --    | --         | --         | ex linha 2 | t1, t2, t3 | 
+| 13   | --    | --         | --         | ex linha 2 | t1, t2, t3 |  
+| 14   | --    | --         | --         | ex linha 2 | t1, t2, t3 |  
+| 15   | --    | --         | --         | fi         | t1, t2, t3 |   **t3 finaliza sua execução (fi), liberando espaco na fila**
+| 16   | ex t1 | --         | --         | --         | t2, t3     |
+| 17   | --    | ex linha 2 | --         | --         | t2, t3     |
+| 18   | ex t2 | pr         | --         | --         | t1, t3     |
+| 19   | --    | --         | ex linha 2 | --         | t1, t3     |
+| 20   | ex t1 | --         | pr         | --         | t1, t2, t3 |  
+| 21   | --    | ex linha 3 | --         | --         | t2, t3     |  
+| 22   | ex t2 | su 1       | --         | --         | t2, t3     |
+| 23   | --    | su 2       | ex linha 3 | --         | t3         |  
+| 24   | ex t1 | pr         | su 1       | --         | t1, t3     |
+| 25   | --    | ex linha 3 | pr         | --         | t2, t3     | 
+| 26   | ex t2 | su 1       | --         | --         | t3         |
+| 27   | --    | su 2       | ex linha 3 | --         | t3         | 
+| 28   | ex t1 | pr         | su 1       | --         | t1, t3     |
+| 29   | --    | ex linha 3 | pr         | --         | t2, t3     |  
+| 30   | ex t2 | su 1       | --         | --         | t3         |
+| 31   | --    | su 2       | ex linha 3 | --         | t3         |  
+| 32   | ex t1 | pr         | su 1       | --         | t1, t3     |
+| 33   | --    | ex linha 3 | pr         | --         | t2, t3     |  
+| 34   | ex t2 | su 1       | --         | --         | t3         |
+| 35   | --    | su 2       | ex linha 3 | --         | t3         |  
+| 36   | ex t1 | fi         | su 1       | --         | t1, t3     |   **t1 finaliza aq**
+| 37   | --    | --         | fi         | --         | t1, t2, t3 |   **t2 finaliza, encerrando a execuçao das tarefas**
+
